@@ -1,5 +1,29 @@
 <html>
 <body>
-<div> {{some}} </div>
+<form method="post">
+    <input type="text" name="type" placeholder="Enter type"/>
+    <input type="text" name="name" placeholder="Enter name"/>
+    <input type="text" name="productNumber" placeholder="Enter productNumber "/>
+    <input type="text" name="numberOfGoods" placeholder="Enter numberOfGoods"/>
+    <input type="text" name="unitPrice" placeholder="Enter unitPrice "/>
+    <input type="text" name="totalPrice" placeholder="Enter totalPrice "/>
+
+
+    <button type="submit">Add</button>
+
+</form>
+
+<div> Список з бази даних </div>
+{{#message}}
+<div>
+    <span>{{type}}</span>
+    <b>{{name}}</b>
+    <i>{{productNumber}}</i>
+    <i>{{numberOfGoods }}</i>
+    <i>{{unitPrice}}</i>
+    <i>{{totalPrice}}</i>
+</div>
+{{/message}}
+
 <body>
 </html>
