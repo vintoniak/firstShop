@@ -21,16 +21,19 @@
 </form>
 
 <div> Список з бази даних </div>
-{{#message}}
+{{#messages}}
 <div>
+    <span>{{id}}</span>
     <span>{{type}}</span>
     <b>{{name}}</b>
     <i>{{productNumber}}</i>
-    <i>{{numberOfGoods }}</i>
+
+    <i>{{numberOfGoods}}</i>
     <i>{{unitPrice}}</i>
     <i>{{totalPrice}}</i>
-</div>
-{{/message}}
 
-<body>
+</div>
+{{/messages}}
+
+</body>
 </html>

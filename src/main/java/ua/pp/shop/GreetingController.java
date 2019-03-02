@@ -20,17 +20,19 @@ public class GreetingController {
 
     @GetMapping("/greeting")
     public String greeting(
-            @RequestParam(name="name", required=false, defaultValue="World") String type, @RequestParam String name,
-            @RequestParam String productNumber,@RequestParam Integer numberOfGoods,
-            @RequestParam Double unitPrice,@RequestParam Double totalPrice,
+            @RequestParam String type, @RequestParam String name,
+            @RequestParam String productNumber,@RequestParam String numberOfGoods,
+            @RequestParam String unitPrice,@RequestParam String totalPrice,
             Map<String,Object> model
     ) {
-        model.put("type", type);
+        Message messages = new Message(type, name, productNumber, numberOfGoods, unitPrice, totalPrice);
+      /*  model.put("type", type);
         model.put("name", name);
         model.put("productNumber", productNumber);
         model.put("numberOfGoods", numberOfGoods);
         model.put("unitPrice", unitPrice);
-        model.put("totalPrice", totalPrice);
+        model.put("totalPrice", totalPrice); */
+        model.put("messages", messages);
         return "greeting";
     }
 
@@ -44,8 +46,8 @@ public class GreetingController {
 
     @PostMapping
     public String add(@RequestParam String type, @RequestParam String name,
-                      @RequestParam String productNumber,@RequestParam Integer numberOfGoods,
-                      @RequestParam Double unitPrice,@RequestParam Double totalPrice, Map<String,Object> model){
+                      @RequestParam String productNumber,@RequestParam String numberOfGoods,
+                      @RequestParam String unitPrice,@RequestParam String totalPrice, Map<String,Object> model){
         Message messages = new Message(type, name, productNumber, numberOfGoods, unitPrice, totalPrice);
         messages.setType(type);
         messages.setName(name);
@@ -54,7 +56,7 @@ public class GreetingController {
         messages.setUnitPrice(unitPrice);
         messages.setTotalPrice(totalPrice);
         messageRepo.save(messages);
-        model.put("message", messages);
+        model.put("messages", messages);
         return "main";
     }
 
@@ -68,7 +70,7 @@ public class GreetingController {
         }
 
 
-        model.put("message", messages);
+        model.put("messages", messages);
         return "main";
     }
 }
