@@ -1,4 +1,4 @@
-package ua.pp.shop.domain.config;
+package ua.pp.shop.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
