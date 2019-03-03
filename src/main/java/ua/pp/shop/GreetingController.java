@@ -18,7 +18,7 @@ public class GreetingController {
     @Autowired
     private MessageRepo messageRepo;
 
-    @GetMapping("/greeting")
+     /* @GetMapping("/greeting")
     public String greeting(
             @RequestParam String type, @RequestParam String name,
             @RequestParam String productNumber,@RequestParam String numberOfGoods,
@@ -26,17 +26,21 @@ public class GreetingController {
             Map<String,Object> model
     ) {
         Message messages = new Message(type, name, productNumber, numberOfGoods, unitPrice, totalPrice);
-      /*  model.put("type", type);
+      model.put("type", type);
         model.put("name", name);
         model.put("productNumber", productNumber);
         model.put("numberOfGoods", numberOfGoods);
         model.put("unitPrice", unitPrice);
-        model.put("totalPrice", totalPrice); */
+        model.put("totalPrice", totalPrice);
         model.put("messages", messages);
         return "greeting";
-    }
+    } */
 
-    @GetMapping
+    @GetMapping("/")
+    public String greeting( Map<String, Object> model) {
+        return "greeting";
+    }
+    @GetMapping("/main")
     public String main(Map<String, Object> model){
         Iterable<Message> messages = messageRepo.findAll();
 
@@ -44,7 +48,7 @@ public class GreetingController {
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(@RequestParam String type, @RequestParam String name,
                       @RequestParam String productNumber,@RequestParam String numberOfGoods,
                       @RequestParam String unitPrice,@RequestParam String totalPrice, Map<String,Object> model){
