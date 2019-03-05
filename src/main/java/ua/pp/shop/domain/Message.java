@@ -1,9 +1,6 @@
 package ua.pp.shop.domain;
 import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Message {
@@ -17,6 +14,16 @@ public class Message {
     private String unitPrice;
     private String totalPrice;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
+
+    public User getAuthor() {
+        return author;
+    }
+    public void setAuthor(User author) {
+        this.author = author;
+    }
     public Integer getId() {
         return id;
     }
@@ -76,12 +83,16 @@ public class Message {
     public Message() {
     }
 
-    public Message(String type, String name, String productNumber, String numberOfGoods, String unitPrice, String totalPrice) {
+    public Message(String type, String name, String productNumber, String numberOfGoods, String unitPrice, String totalPrice, User user) {
         this.type = type;
         this.name = name;
         this.productNumber = productNumber;
         this.numberOfGoods = numberOfGoods;
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
+        this.author = user;
+    }
+    public String getAuthorName(){
+        return author !=null ? author.getUsername(): "<none>";
     }
 }

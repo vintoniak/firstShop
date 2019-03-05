@@ -2,15 +2,15 @@ package ua.pp.shop.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.pp.shop.domain.Message;
+import ua.pp.shop.domain.User;
 import ua.pp.shop.repos.MessageRepo;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -49,16 +49,24 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String add(@RequestParam String type, @RequestParam String name,
-                      @RequestParam String productNumber,@RequestParam String numberOfGoods,
-                      @RequestParam String unitPrice,@RequestParam String totalPrice, Map<String,Object> model){
-        Message messages = new Message(type, name, productNumber, numberOfGoods, unitPrice, totalPrice);
+    public String add(
+            @AuthenticationPrincipal User user,
+            @RequestParam String type,
+            @RequestParam String name,
+            @RequestParam String productNumber,
+            @RequestParam String numberOfGoods,
+            @RequestParam String unitPrice,
+            @RequestParam String totalPrice,
+            Map<String,Object> model){
+        Message messages = new Message(type, name, productNumber, numberOfGoods, unitPrice, totalPrice, user);
         messages.setType(type);
         messages.setName(name);
         messages.setProductNumber(productNumber);
         messages.setNumberOfGoods(numberOfGoods);
         messages.setUnitPrice(unitPrice);
         messages.setTotalPrice(totalPrice);
+        messages.setAuthor(user);
+
         messageRepo.save(messages);
         model.put("messages", messages);
         return "main";
