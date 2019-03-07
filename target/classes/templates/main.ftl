@@ -1,11 +1,8 @@
-<html>
-<body>
+<#import "parts/common.ftl" as c>
+<#import "parts/login.ftl" as l>
 
-<form action="/logout" method="post">
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-    <input type="submit" value="Sign Out"/>
-</form>
-
+<@c.page>
+<@l.logout/>
 <form method="post">
     <input type="text" name="type" placeholder="Enter type"/>
     <input type="text" name="name" placeholder="Enter name"/>
@@ -13,7 +10,7 @@
     <input type="text" name="numberOfGoods" placeholder="Enter numberOfGoods"/>
     <input type="text" name="unitPrice" placeholder="Enter unitPrice "/>
     <input type="text" name="totalPrice" placeholder="Enter totalPrice "/>
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <button type="submit">Add</button>
 
 </form>
@@ -22,25 +19,26 @@
 
 <form method="post" action="filter">
     <input type="text" name="type" />
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <button type="submit">Filter</button>
 </form>
 
 <div> Список з бази даних </div>
-{{#messages}}
+<#list messages as message>
 <div>
-    <span>{{id}}</span>
-    <span>{{type}}</span>
-    <b>{{name}}</b>
-    <i>{{productNumber}}</i>
+    <span>${message.id}</span>
+    <span>${message.type}</span>
+    <b>${message.name}</b>
+    <i>${message.productNumber}</i>
 
-    <i>{{numberOfGoods}}</i>
-    <i>{{unitPrice}}</i>
-    <i>{{totalPrice}}</i>
-    <strong>{{authorName}}</strong>
+    <i>${message.numberOfGoods}</i>
+    <i>${message.unitPrice}</i>
+    <i>${message.totalPrice}</i>
+    <strong>${message.authorName}</strong>
 
 </div>
-{{/messages}}
+<#else>
+No message
+</#list>
 
-</body>
-</html>
+    </@c.page>

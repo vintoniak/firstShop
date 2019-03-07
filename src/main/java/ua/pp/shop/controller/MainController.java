@@ -32,7 +32,7 @@ public class MainController {
         model.put("numberOfGoods", numberOfGoods);
         model.put("unitPrice", unitPrice);
         model.put("totalPrice", totalPrice);
-        model.put("messages", messages);
+        id_UNIQUEmodel.put("messages", messages);
         return "greeting";
     } */
 
@@ -66,9 +66,9 @@ public class MainController {
         messages.setUnitPrice(unitPrice);
         messages.setTotalPrice(totalPrice);
         messages.setAuthor(user);
-
         messageRepo.save(messages);
-        model.put("messages", messages);
+        Iterable<Message> message = messageRepo.findAll();
+        model.put("messages", message);
         return "main";
     }
 
